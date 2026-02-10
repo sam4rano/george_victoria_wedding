@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { Hero } from "@/components/sections/Hero";
 import { GallerySection } from "@/components/sections/GallerySection";
+import { DatePlaceSection } from "@/components/sections/DatePlaceSection";
+import { RsvpSection } from "@/components/sections/RsvpSection";
 import { Footer } from "@/components/sections/Footer";
 import { Navbar } from "@/components/sections/Navbar";
 import { getDefaultGallery } from "@/lib/sanity/fetch";
@@ -27,26 +29,8 @@ export default function Home() {
         >
           <GalleryData />
         </Suspense>
-        <section id="date" className="bg-neutral-50 py-16 md:py-24">
-          <div className="mx-auto max-w-2xl px-4 text-center">
-            <h2 className="font-display text-3xl font-medium italic text-[var(--color-rose,#8b4a5c)] md:text-4xl">
-              Date & Place
-            </h2>
-            <p className="mt-4 font-body text-neutral-500">
-              Details coming soon.
-            </p>
-          </div>
-        </section>
-        <section id="rsvp" className="bg-dominant py-16 md:py-24">
-          <div className="mx-auto max-w-2xl px-4 text-center">
-            <h2 className="font-display text-3xl font-medium italic text-[var(--color-rose,#8b4a5c)] md:text-4xl">
-              RSVP
-            </h2>
-            <p className="mt-4 font-body text-neutral-500">
-              RSVP form coming soon.
-            </p>
-          </div>
-        </section>
+        <DatePlaceSection />
+        <RsvpSection />
         <Footer />
       </main>
     </div>
