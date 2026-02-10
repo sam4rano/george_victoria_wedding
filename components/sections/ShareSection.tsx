@@ -333,29 +333,29 @@ export function ShareSection() {
             className={cn(
               "flex w-[320px] max-w-full rounded-2xl border border-neutral-200 bg-dominant p-5 shadow-xl",
               cardStyle === "minimal" && "h-[320px] flex-col items-center justify-center",
-              cardStyle === "photo" && (photoPreview ? "min-h-[360px] flex-col items-center" : "h-[320px] flex-col items-center justify-center"),
+              cardStyle === "photo" && (photoPreview ? "min-h-[440px] flex-col items-center" : "h-[320px] flex-col items-center justify-center"),
               cardStyle === "photo-side" && "min-h-[320px] flex-row gap-3"
             )}
           >
             {cardStyle !== "minimal" && photoPreview && (
               <div className={cn("flex shrink-0 items-center justify-center", cardStyle === "photo" && "mb-3", cardStyle === "photo-side" && "mb-0")}>
                 {cardStyle === "photo" ? (
-                  <div className="flex size-[140px] items-center justify-center rounded-full border-[3px] border-neutral-300 bg-neutral-100 p-0.5 shadow-inner">
+                  <div className="flex size-[200px] items-center justify-center rounded-full border-[3px] border-neutral-300 bg-neutral-100 p-0.5 shadow-inner">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={photoPreview}
                       alt=""
-                      className="size-[126px] rounded-full object-cover border-2 border-white shadow"
+                      className="size-[186px] rounded-full object-cover border-2 border-white shadow"
                       onLoad={() => setPhotoLoaded(true)}
                     />
                   </div>
                 ) : (
-                  <div className="flex size-[100px] shrink-0 items-center justify-center rounded-xl border-[3px] border-neutral-300 bg-neutral-100 p-0.5 shadow-inner">
+                  <div className="flex size-[140px] shrink-0 items-center justify-center rounded-xl border-[3px] border-neutral-300 bg-neutral-100 p-0.5 shadow-inner">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={photoPreview}
                       alt=""
-                      className="size-[90px] rounded-[10px] object-cover border-2 border-white shadow"
+                      className="size-[126px] rounded-[10px] object-cover border-2 border-white shadow"
                       onLoad={() => setPhotoLoaded(true)}
                     />
                   </div>
