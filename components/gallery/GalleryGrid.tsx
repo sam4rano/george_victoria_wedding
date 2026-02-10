@@ -42,7 +42,7 @@ export function GalleryGrid({ images }: GalleryGridProps) {
 
   if (filtered.length === 0) {
     return (
-      <p className="font-body text-center text-[var(--color-neutral-500)]">
+      <p className="font-body text-center text-neutral-500">
         No photos yet. Check back soon.
       </p>
     );
@@ -66,8 +66,8 @@ export function GalleryGrid({ images }: GalleryGridProps) {
               type="button"
               onClick={() => setLightboxIndex(index)}
               className={cn(
-                "group relative aspect-[4/3] overflow-hidden rounded-lg",
-                "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2",
+                "group relative aspect-4/3 overflow-hidden rounded-lg",
+                "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
                 "transition-transform duration-300 ease-out hover:scale-[1.02]"
               )}
               aria-label={`View image ${index + 1}: ${alt}`}
@@ -81,8 +81,8 @@ export function GalleryGrid({ images }: GalleryGridProps) {
               />
               <span
                 className={cn(
-                  "absolute inset-0 bg-[var(--color-neutral-900)]/0 transition-colors duration-300",
-                  "group-hover:bg-[var(--color-neutral-900)]/10"
+                  "absolute inset-0 bg-neutral-900/0 transition-colors duration-300",
+                  "group-hover:bg-neutral-900/10"
                 )}
                 aria-hidden
               />
@@ -101,7 +101,7 @@ export function GalleryGrid({ images }: GalleryGridProps) {
               <DialogTitle className="sr-only">
                 {current.alt || current.caption || "Gallery image"}
               </DialogTitle>
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-[var(--color-neutral-900)]">
+              <div className="relative aspect-4/3 w-full overflow-hidden rounded-lg bg-neutral-900">
                 <Image
                   src={urlFor(current.asset).width(1200).height(900).fit("max").url()}
                   alt={current.alt || current.caption || "Gallery image"}
@@ -110,7 +110,7 @@ export function GalleryGrid({ images }: GalleryGridProps) {
                 />
               </div>
               {(current.caption || current.alt) && (
-                <p className="mt-2 text-center font-body text-sm text-[var(--color-dominant)]">
+                <p className="mt-2 text-center font-body text-sm text-dominant">
                   {current.caption || current.alt}
                 </p>
               )}
@@ -118,14 +118,14 @@ export function GalleryGrid({ images }: GalleryGridProps) {
                 <button
                   type="button"
                   onClick={goPrev}
-                  className="rounded-md px-4 py-2 font-body text-sm text-[var(--color-dominant)] hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-dominant)]"
+                  className="rounded-md px-4 py-2 font-body text-sm text-dominant hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-dominant"
                 >
                   Previous
                 </button>
                 <button
                   type="button"
                   onClick={goNext}
-                  className="rounded-md px-4 py-2 font-body text-sm text-[var(--color-dominant)] hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-dominant)]"
+                  className="rounded-md px-4 py-2 font-body text-sm text-dominant hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-dominant"
                 >
                   Next
                 </button>

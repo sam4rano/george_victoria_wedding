@@ -13,9 +13,11 @@
   --font-body: var(--font-body);
   --color-dominant: var(--color-dominant);
   --color-accent: var(--color-accent);
+  --color-rose: var(--color-rose);
   --color-neutral-50: var(--color-neutral-50);
   --color-neutral-100: var(--color-neutral-100);
   --color-neutral-200: var(--color-neutral-200);
+  --color-neutral-300: var(--color-neutral-300);
   --color-neutral-500: var(--color-neutral-500);
   --color-neutral-900: var(--color-neutral-900);
   --spacing-unit: var(--spacing-unit);
@@ -37,7 +39,6 @@
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -62,9 +63,11 @@
   --radius: 0.625rem;
   --color-dominant: oklch(0.98 0.012 85);
   --color-accent: oklch(0.52 0.18 12);
+  --color-rose: oklch(0.52 0.18 12);
   --color-neutral-50: oklch(0.985 0.004 85);
   --color-neutral-100: oklch(0.96 0.008 85);
   --color-neutral-200: oklch(0.91 0.01 85);
+  --color-neutral-300: oklch(0.78 0.015 85);
   --color-neutral-500: oklch(0.55 0.02 85);
   --color-neutral-900: oklch(0.22 0.02 85);
   --background: var(--color-dominant);
@@ -148,6 +151,9 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
