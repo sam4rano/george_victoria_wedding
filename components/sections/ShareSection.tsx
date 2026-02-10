@@ -197,7 +197,7 @@ export function ShareSection() {
       className="bg-[#101922] pt-0 pb-24 md:pb-32"
     >
       {/* Sticky "Share the joy" – card content scrolls up into this area */}
-      <div className="sticky top-16 z-10 bg-[#101922] pb-6 pt-16 md:pt-20" aria-hidden={false}>
+      <div className="sticky top-10 z-10 bg-[#101922] pb-4 pt-10 md:pt-10" aria-hidden={false}>
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
           <h2 className="font-display text-3xl font-medium tracking-tight text-white md:text-4xl">
             Share the joy
@@ -300,8 +300,8 @@ export function ShareSection() {
         </div>
         {(cardStyle === "photo" || cardStyle === "photo-side") && (
           <div className="mt-4 flex flex-col items-center gap-2">
-            <label className="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-5 py-3 font-body text-sm text-white transition hover:bg-white/20 hover:border-white/50">
-              <ImagePlus className="size-5 shrink-0 text-white/90" />
+            <label className="inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-2 py-1 font-body text-sm text-white transition hover:bg-white/20 hover:border-white/50">
+              <ImagePlus className="size-4 shrink-0 text-white/90" />
               <span>{photoPreview ? "Change photo" : "Add your photo"}</span>
               <input
                 type="file"
@@ -331,31 +331,31 @@ export function ShareSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className={cn(
-              "flex w-[320px] max-w-full rounded-2xl border border-neutral-200 bg-dominant p-5 shadow-xl",
-              cardStyle === "minimal" && "h-[320px] flex-col items-center justify-center",
-              cardStyle === "photo" && (photoPreview ? "min-h-[440px] flex-col items-center" : "h-[320px] flex-col items-center justify-center"),
-              cardStyle === "photo-side" && "min-h-[320px] flex-row gap-3"
+              "flex w-[320px] max-w-full rounded-2xl border border-neutral-200 bg-dominant shadow-xl",
+              cardStyle === "minimal" && "h-[320px] flex-col items-center justify-center p-5",
+              cardStyle === "photo" && (photoPreview ? "min-h-[440px] flex-col items-center pt-6 pb-5 px-5" : "h-[320px] flex-col items-center justify-center p-5"),
+              cardStyle === "photo-side" && "min-h-[320px] flex-row gap-3 p-5"
             )}
           >
             {cardStyle !== "minimal" && photoPreview && (
-              <div className={cn("flex shrink-0 items-center justify-center", cardStyle === "photo" && "mb-3", cardStyle === "photo-side" && "mb-0")}>
+              <div className={cn("flex shrink-0 items-center justify-center", cardStyle === "photo" && "mb-5", cardStyle === "photo-side" && "mb-0")}>
                 {cardStyle === "photo" ? (
-                  <div className="flex size-[200px] items-center justify-center rounded-full border-[3px] border-neutral-300 bg-neutral-100 p-0.5 shadow-inner">
+                  <div className="flex size-[240px] items-center justify-center rounded-full border-2 border-rose bg-neutral-100 p-0.5 shadow-inner">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={photoPreview}
                       alt=""
-                      className="size-[186px] rounded-full object-cover border-2 border-white shadow"
+                      className="size-[200px] rounded-full object-cover border border-white shadow"
                       onLoad={() => setPhotoLoaded(true)}
                     />
                   </div>
                 ) : (
-                  <div className="flex size-[140px] shrink-0 items-center justify-center rounded-xl border-[3px] border-neutral-300 bg-neutral-100 p-0.5 shadow-inner">
+                  <div className="flex size-[140px] shrink-0 items-center justify-center rounded-xl border-[3px] border-rose bg-neutral-100 p-0.5 shadow-inner">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={photoPreview}
                       alt=""
-                      className="size-[126px] rounded-[10px] object-cover border-2 border-white shadow"
+                      className="size-[176px] rounded-[4px] object-cover border-2 border-white shadow"
                       onLoad={() => setPhotoLoaded(true)}
                     />
                   </div>
@@ -364,7 +364,7 @@ export function ShareSection() {
             )}
             <div className={cn("flex flex-col items-center text-center", cardStyle === "photo-side" && "items-start flex-1 justify-center text-left")}>
               <p className="font-body text-[0.65rem] uppercase tracking-[0.2em] text-neutral-500">I&apos;m celebrating with</p>
-              <p className="mt-1.5 font-display text-xl font-medium text-neutral-800">{COUPLE}</p>
+              <p className="mt-1.5 font-display text-xl font-medium text-rose">{COUPLE}</p>
               <p className="mt-0.5 font-body text-[0.7rem] text-neutral-600">{DATE}</p>
               {guestName.trim() && <p className="mt-1.5 font-body text-[0.7rem] font-medium text-neutral-800">— {guestName.trim()}</p>}
               {guestMessage.trim() && <p className="mt-1 font-body text-[0.65rem] italic text-neutral-600">&ldquo;{guestMessage.trim()}&rdquo;</p>}
