@@ -12,6 +12,7 @@ import {
 import { urlFor } from "@/lib/sanity/image";
 import type { GalleryImage } from "@/types/sanity";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
@@ -20,6 +21,7 @@ import "swiper/css/pagination";
 interface GallerySwiperProps {
   images: GalleryImage[];
   variant?: "light" | "dark";
+  slideSize?: "default" | "large";
 }
 
 const navClasses = {
@@ -36,10 +38,16 @@ const paginationClasses = {
     "[&_.swiper-pagination-bullet]:bg-white/40 [&_.swiper-pagination-bullet-active]:bg-white",
 };
 
-export function GallerySwiper({ images, variant = "dark" }: GallerySwiperProps) {
+const slideSizeClasses = {
+  default: "w-[280px]! sm:w-[320px]! md:w-[360px]!",
+  large: "w-[320px]! sm:w-[400px]! md:w-[480px]! lg:w-[520px]!",
+};
+
+export function GallerySwiper({ images, variant = "dark", slideSize = "default" }: GallerySwiperProps) {
   const navCls = navClasses[variant];
   const paginationCls = paginationClasses[variant];
   const filtered = images.filter((img) => img.asset?.url);
+  const isLarge = slideSize === "large";
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const open = lightboxIndex !== null;
   const current = open && filtered[lightboxIndex] ? filtered[lightboxIndex] : null;
@@ -115,15 +123,15 @@ export function GallerySwiper({ images, variant = "dark" }: GallerySwiperProps) 
           {filtered.map((item, index) => {
             const alt = item.alt || item.caption || "Gallery image";
             const imageUrl = urlFor(item.asset)
-              .width(800)
-              .height(600)
+              .width(isLarge ? 1040 : 800)
+              .height(isLarge ? 780 : 600)
               .fit("max")
               .url();
 
             return (
               <SwiperSlide
                 key={item._key}
-                className="w-[280px]! sm:w-[320px]! md:w-[360px]! cursor-pointer"
+                className={cn(slideSizeClasses[slideSize], "cursor-pointer")}
               >
                 <button
                   type="button"
@@ -135,7 +143,7 @@ export function GallerySwiper({ images, variant = "dark" }: GallerySwiperProps) 
                     src={imageUrl}
                     alt={alt}
                     fill
-                    sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, 360px"
+                    sizes={isLarge ? "(max-width: 640px) 320px, (max-width: 768px) 400px, (max-width: 1024px) 480px, 520px" : "(max-width: 640px) 280px, (max-width: 768px) 320px, 360px"}
                     className="object-cover transition-transform duration-300 ease-out group-hover:scale-105"
                   />
                   <span

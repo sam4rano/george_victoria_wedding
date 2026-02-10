@@ -52,25 +52,61 @@ Same Project ID and dataset as above.
 
 ## 5. Galleries (Our Day, Family, Friends, Bride, Groom)
 
-The site shows five gallery sections. In the Studio sidebar you’ll see **Galleries** with:
+The site shows five gallery sections. In the Studio sidebar open **Galleries**; you’ll see:
 
-- **Our Day** – main wedding gallery (order `0`)
+- **Our Day** – main wedding gallery
 - **Family**
 - **Friends**
 - **Bride**
 - **Groom**
-- **All galleries** – list of every gallery
+- **All galleries** – every gallery document
 
-**To add photos to a section:**
+### How to add pictures for each category (via slug)
 
-1. Open **Galleries** in the sidebar, then the section (e.g. **Family**).
-2. If the list is empty, click **Create new**.
-3. When asked for a template, choose the one that matches the section (e.g. **Family**). Title and slug will be set for you.
-4. Add images in the **Images** array (upload or select), add optional alt text or captions, then **Publish**.
+Each category on the site is tied to a **slug**. You create one Gallery document per category and set its slug to match.
 
-**Slug / order:** Our Day uses slug `our-day` and order `0`; Family/Friends/Bride/Groom use slugs `family`, `friends`, `bride`, `groom`. The site uses the first gallery by **Order** for the “Our Day” section if no `our-day` slug exists.
+| Category on site | Slug to set in Sanity |
+|------------------|------------------------|
+| Our Day          | `our-day` (and **Order** `0` if you want it first) |
+| Family           | `family` |
+| Friends          | `friends` |
+| Bride            | `bride` |
+| Groom            | `groom` |
 
-## 6. Run commands
+**Steps:**
+
+1. In the sidebar, go to **Galleries** → the category you want (e.g. **Family**).
+2. If the list is empty, click **Create new** (you’ll get a new Gallery document).
+3. Fill in:
+   - **Title** – e.g. `Family`
+   - **Slug** – click **Generate** (from title), then **edit** the slug so it is exactly: `family` (or `friends`, `bride`, `groom`, `our-day`). Lowercase, no spaces.
+   - **Order** – for “Our Day” use `0`; others can be `1`, `2`, etc. (optional).
+4. In **Images**, add items: click **Add item**, then **Image** – upload or select from the asset library. Add optional **Alt text** or **Caption**.
+5. Click **Publish**.
+
+Repeat for each category (Family, Friends, Bride, Groom, Our Day). The site loads each section by slug (`family`, `friends`, etc.), so the slug must match exactly.
+
+## 6. Production deployment (e.g. GitHub → Vercel)
+
+**Sanity is not “pushed” to production.** Content lives on Sanity’s servers. Your repo only deploys the Next.js site; the site then loads content from Sanity using your project ID and dataset.
+
+**What you need to do:**
+
+1. **Set environment variables on your host** (Vercel, Netlify, etc.):
+   - `NEXT_PUBLIC_SANITY_PROJECT_ID` = your Sanity project ID (e.g. `vdl9q4qh`)
+   - `NEXT_PUBLIC_SANITY_DATASET` = `production` (or the dataset you use)
+   - `NEXT_PUBLIC_SITE_URL` = your live site URL (e.g. `https://your-site.vercel.app`) — optional but recommended for OG/links
+
+   Do **not** commit `.env` or `.env.local`; configure these in the host’s dashboard (e.g. Vercel → Project → Settings → Environment Variables).
+
+2. **Add your production URL to Sanity CORS:**
+   - [sanity.io/manage](https://www.sanity.io/manage) → your project → **API** → **CORS origins**
+   - Add your production origin, e.g. `https://your-site.vercel.app` or `https://yourdomain.com`
+   - Leave **Allow credentials** on so the embedded Studio at `yoursite.com/studio` can log in.
+
+3. **Content:** The same Sanity project and dataset you use locally is used in production. No extra “push” of Sanity; publish content in Studio and the live site will show it.
+
+## 7. Run commands
 
 | Goal              | Where              | Command                    |
 |-------------------|--------------------|----------------------------|

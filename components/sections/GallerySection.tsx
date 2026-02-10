@@ -12,8 +12,9 @@ interface GallerySectionProps {
   sectionId: string;
   title: string;
   variant?: GalleryVariant;
-  /** Alternate background for visual rhythm (e.g. off-white vs subtle grey) */
   altBg?: boolean;
+  /** Larger section and slides (e.g. for "Our Day") */
+  large?: boolean;
 }
 
 const motionByVariant = {
@@ -21,7 +22,7 @@ const motionByVariant = {
   left: { initial: { opacity: 0, x: -24 }, whileInView: { opacity: 1, x: 0 }, transition: { duration: 0.45, delay: 0.08, ease: "easeOut" as const } },
 };
 
-export function GallerySection({ gallery, sectionId, title, variant = "center", altBg = false }: GallerySectionProps) {
+export function GallerySection({ gallery, sectionId, title, variant = "center", altBg = false, large = false }: GallerySectionProps) {
   const images = gallery?.images ?? [];
   const headingId = `${sectionId}-heading`;
   const motionConfig = motionByVariant[variant];
@@ -34,7 +35,8 @@ export function GallerySection({ gallery, sectionId, title, variant = "center", 
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "px-4 py-20 md:py-28 lg:px-8 overflow-visible scroll-mt-20",
+        "px-4 lg:px-8 overflow-visible scroll-mt-20",
+        large ? "py-24 md:py-36" : "py-20 md:py-28",
         altBg ? "bg-neutral-50/80" : "bg-off-white"
       )}
       aria-labelledby={headingId}
@@ -45,13 +47,14 @@ export function GallerySection({ gallery, sectionId, title, variant = "center", 
           {...motionConfig}
           viewport={{ once: true }}
           className={cn(
-            "mb-12 font-display text-4xl font-medium text-neutral-900 md:text-5xl lg:mb-16",
+            "font-display font-medium text-neutral-900 md:text-5xl",
+            large ? "mb-14 text-4xl lg:mb-20 lg:text-5xl" : "mb-12 text-4xl lg:mb-16",
             variant === "center" ? "text-center" : "text-left"
           )}
         >
           {title}
         </motion.h2>
-        <GallerySwiper images={images} variant="light" />
+        <GallerySwiper images={images} variant="light" slideSize={large ? "large" : "default"} />
       </div>
     </motion.section>
   );

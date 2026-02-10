@@ -43,6 +43,7 @@ async function GalleriesData() {
           title={section.title}
           variant={i % 2 === 0 ? "center" : "left"}
           altBg={i % 2 === 1}
+          large={section.id === "gallery"}
         />
       ))}
     </>

@@ -196,25 +196,22 @@ export function ShareSection() {
       transition={{ duration: 0.4 }}
       className="bg-[#101922] pt-0 pb-24 md:pb-32"
     >
-      {/* Sticky "Share the joy" – card content scrolls up INTO this area */}
-      <div
-        className="sticky top-16 z-10 border-b border-white/10 bg-[#101922] pb-8 pt-20 md:pt-28"
-        aria-hidden={false}
-      >
+      {/* Sticky "Share the joy" – card content scrolls up into this area */}
+      <div className="sticky top-16 z-10 bg-[#101922] pb-10 pt-20 md:pt-28" aria-hidden={false}>
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
-          <h2 className="font-display text-3xl font-medium text-white md:text-4xl">
+          <h2 className="font-display text-3xl font-medium tracking-tight text-white md:text-4xl">
             Share the joy
           </h2>
-          <p className="mt-4 font-body text-neutral-300">
+          <p className="mt-3 font-body text-neutral-400">
             Share our day with friends or create your own shareable card.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={handleWhatsApp}
               className={cn(
-                "inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-5 py-2.5 font-body text-sm font-medium text-white",
-                "transition hover:bg-white/20 hover:border-white/50"
+                "inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2.5 font-body text-sm font-medium text-white",
+                "transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101922]"
               )}
               aria-label="Share on WhatsApp"
             >
@@ -225,9 +222,9 @@ export function ShareSection() {
               type="button"
               onClick={handleCopyLink}
               className={cn(
-                "inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-5 py-2.5 font-body text-sm font-medium text-white",
-                "transition hover:bg-white/20 hover:border-white/50",
-                copied && "border-white/60 bg-white/20"
+                "inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2.5 font-body text-sm font-medium text-white",
+                "transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101922]",
+                copied && "bg-white/20"
               )}
               aria-label="Copy link"
             >
@@ -238,7 +235,7 @@ export function ShareSection() {
               <button
                 type="button"
                 onClick={handleNativeShare}
-                className="inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-5 py-2.5 font-body text-sm font-medium text-white transition hover:bg-white/20 hover:border-white/50"
+                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2.5 font-body text-sm font-medium text-white transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101922]"
                 aria-label="Share"
               >
                 <Share2 className="size-5" />
@@ -251,7 +248,7 @@ export function ShareSection() {
 
       {/* Card creation panel – scrolls up and into the sticky "Share the joy" div above */}
       <div className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
-        <div className="rounded-2xl border border-white/15 bg-white/6 p-6 shadow-xl backdrop-blur-sm md:p-8">
+        <div className="rounded-2xl bg-white/[0.07] p-6 shadow-2xl backdrop-blur-md md:p-8">
           <p className="font-body text-sm font-medium text-white">Create your shareable card</p>
           <p className="mt-1 font-body text-sm text-neutral-400">
             Add your name, optional photo and message, then download to share.
