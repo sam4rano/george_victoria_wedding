@@ -2,7 +2,7 @@
 
 import { useCallback } from "react";
 import { motion } from "framer-motion";
-import { CalendarPlus, Download } from "lucide-react";
+import { CalendarPlus, Download, MapPin } from "lucide-react";
 
 const DATE = "Saturday, 14 February 2026";
 const EVENTS = [
@@ -10,6 +10,15 @@ const EVENTS = [
   { time: "11:00 AM", label: "Church Service", venue: "Christ Apostolic Church, No 1, Talafia, Ede, Osun State" },
   { time: "Reception follows", label: "Reception", venue: "Redeem Event Hall, opposite Admus Hotel, Ede, Osun State" },
 ];
+
+const DIRECTORY = [
+  { name: "Redeem Event Hall", address: "Opposite Admus Hotel, Ede, Osun State", query: "Redeem Event Hall, Ede, Osun State" },
+  { name: "Christ Apostolic Church", address: "No 1, Talafia, Ede, Osun State", query: "Christ Apostolic Church Talafia Ede Osun State" },
+] as const;
+
+function getDirectionsUrl(query: string): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
 const DRESS_CODE = "Navy Blue, White & Gold";
 const VERSE = "For where two or three gather in My name, there am I with them.";
 const VERSE_REF = "Matthew 18:20";
@@ -57,10 +66,10 @@ export function DatePlaceSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className="bg-[#101922] py-24 md:py-32"
+      className="bg-[#101922] py-16 md:py-24"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1fr,1.2fr] lg:gap-16 lg:items-start">
+        <div className="grid gap-8 lg:grid-cols-[1fr,1.2fr] lg:gap-10 lg:items-start">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -84,9 +93,9 @@ export function DatePlaceSection() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-4 py-2.5 font-body text-sm font-medium text-white transition-colors hover:bg-white/15"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/10 px-5 py-3 font-body text-sm font-medium text-white transition-colors hover:bg-white/15"
               >
-                <CalendarPlus className="size-4" />
+                <CalendarPlus className="size-5 shrink-0" />
                 Google Calendar
               </motion.a>
               <motion.button
@@ -94,9 +103,9 @@ export function DatePlaceSection() {
                 onClick={handleDownloadIcs}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-4 py-2.5 font-body text-sm font-medium text-white transition-colors hover:bg-white/15"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/10 px-5 py-3 font-body text-sm font-medium text-white transition-colors hover:bg-white/15"
               >
-                <Download className="size-4" />
+                <Download className="size-5 shrink-0" />
                 .ics download
               </motion.button>
             </div>
@@ -128,6 +137,38 @@ export function DatePlaceSection() {
             </ul>
           </div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="mt-14 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8"
+        >
+          <h3 className="font-display text-lg font-medium text-white md:text-xl">Directory</h3>
+          <p className="mt-1 font-body text-sm text-neutral-400">
+            Venue addresses and directions
+          </p>
+          <ul className="mt-4 space-y-4">
+            {DIRECTORY.map((place) => (
+              <li key={place.name} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                <div>
+                  <p className="font-body font-medium text-white">{place.name}</p>
+                  <p className="font-body text-sm text-neutral-400">{place.address}</p>
+                </div>
+                <a
+                  href={getDirectionsUrl(place.query)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-xl border border-white/25 bg-white/10 px-5 py-3 font-body text-sm font-medium text-white transition-colors hover:bg-white/15 sm:self-center"
+                >
+                  <MapPin className="size-5 shrink-0" />
+                  Get directions
+                </a>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </div>
     </motion.section>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { GallerySwiper } from "@/components/gallery/GallerySwiper";
 import type { Gallery } from "@/types/sanity";
 import { motion } from "framer-motion";
@@ -35,8 +36,8 @@ export function GallerySection({ gallery, sectionId, title, variant = "center", 
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "px-4 lg:px-8 overflow-visible scroll-mt-20",
-        large ? "py-24 md:py-36" : "py-20 md:py-28",
+        "overflow-visible scroll-mt-20 px-4 lg:px-8",
+        large ? "py-12 md:py-16" : "py-16 md:py-20",
         altBg ? "bg-neutral-50/80" : "bg-off-white"
       )}
       aria-labelledby={headingId}
@@ -48,13 +49,17 @@ export function GallerySection({ gallery, sectionId, title, variant = "center", 
           viewport={{ once: true }}
           className={cn(
             "font-display font-medium text-neutral-900 md:text-5xl",
-            large ? "mb-14 text-4xl lg:mb-20 lg:text-5xl" : "mb-12 text-4xl lg:mb-16",
+            large ? "mb-6 text-4xl lg:mb-8 lg:text-5xl" : "mb-8 text-4xl lg:mb-10",
             variant === "center" ? "text-center" : "text-left"
           )}
         >
           {title}
         </motion.h2>
-        <GallerySwiper images={images} variant="light" slideSize={large ? "large" : "default"} />
+        {large ? (
+          <GalleryGrid images={images} layout="tight" />
+        ) : (
+          <GallerySwiper images={images} variant="light" slideSize="default" />
+        )}
       </div>
     </motion.section>
   );

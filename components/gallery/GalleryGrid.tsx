@@ -11,11 +11,14 @@ import { urlFor } from "@/lib/sanity/image";
 import type { GalleryImage } from "@/types/sanity";
 import { cn } from "@/lib/utils";
 
+type GalleryGridLayout = "default" | "tight";
+
 interface GalleryGridProps {
   images: GalleryImage[];
+  layout?: GalleryGridLayout;
 }
 
-export function GalleryGrid({ images }: GalleryGridProps) {
+export function GalleryGrid({ images, layout = "default" }: GalleryGridProps) {
   const filtered = images.filter((img) => img.asset?.url);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const open = lightboxIndex !== null;
@@ -52,13 +55,19 @@ export function GalleryGrid({ images }: GalleryGridProps) {
     <>
       <div
         className={cn(
-          "grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4",
-          "max-w-6xl mx-auto px-4"
+          "mx-auto max-w-6xl px-4",
+          layout === "tight"
+            ? "grid grid-cols-2 gap-0 sm:grid-cols-4"
+            : "grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4"
         )}
       >
         {filtered.map((item, index) => {
           const alt = item.alt || item.caption || "Gallery image";
-          const imageUrl = urlFor(item.asset).width(800).height(600).fit("max").url();
+          const imageUrl = urlFor(item.asset)
+            .width(layout === "tight" ? 600 : 800)
+            .height(layout === "tight" ? 600 : 600)
+            .fit("max")
+            .url();
 
           return (
             <button
@@ -66,9 +75,11 @@ export function GalleryGrid({ images }: GalleryGridProps) {
               type="button"
               onClick={() => setLightboxIndex(index)}
               className={cn(
-                "group relative aspect-4/3 overflow-hidden rounded-lg",
-                "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
-                "transition-transform duration-300 ease-out hover:scale-[1.02]"
+                "group relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset",
+                "transition-transform duration-300 ease-out hover:scale-[1.02]",
+                layout === "tight"
+                  ? "aspect-square rounded-none"
+                  : "aspect-4/3 rounded-lg"
               )}
               aria-label={`View image ${index + 1}: ${alt}`}
             >
@@ -118,14 +129,14 @@ export function GalleryGrid({ images }: GalleryGridProps) {
                 <button
                   type="button"
                   onClick={goPrev}
-                  className="rounded-md px-4 py-2 font-body text-sm text-dominant hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-dominant"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl px-5 py-3 font-body text-sm font-medium text-dominant hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-dominant"
                 >
                   Previous
                 </button>
                 <button
                   type="button"
                   onClick={goNext}
-                  className="rounded-md px-4 py-2 font-body text-sm text-dominant hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-dominant"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl px-5 py-3 font-body text-sm font-medium text-dominant hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-dominant"
                 >
                   Next
                 </button>

@@ -14,7 +14,7 @@ export function Footer() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       role="contentinfo"
       className={cn(
-        "border-t border-white/10 bg-[#101922] py-14 text-center font-body text-sm text-neutral-400"
+        "border-t border-white/10 bg-[#101922] py-10 text-center font-body text-sm text-neutral-400"
       )}
     >
       <p className="font-display text-xl italic text-rose">

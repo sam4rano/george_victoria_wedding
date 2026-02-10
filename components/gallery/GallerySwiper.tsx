@@ -95,7 +95,7 @@ export function GallerySwiper({ images, variant = "dark", slideSize = "default" 
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-        className="relative mx-auto max-w-5xl overflow-visible px-4 py-8"
+        className="relative mx-auto max-w-5xl overflow-visible px-4 py-4"
       >
         <Swiper
           effect="coverflow"
@@ -174,7 +174,7 @@ export function GallerySwiper({ images, variant = "dark", slideSize = "default" 
             <path d="M9 18l6-6-6-6" />
           </svg>
         </button>
-        <div className={`gallery-swiper-pagination mt-8 flex justify-center gap-1.5 [&_.swiper-pagination-bullet]:h-2 [&_.swiper-pagination-bullet]:w-2 [&_.swiper-pagination-bullet-active]:w-6 [&_.swiper-pagination-bullet-active]:rounded-full ${paginationCls}`} />
+        <div className={`gallery-swiper-pagination mt-4 flex justify-center gap-1.5 [&_.swiper-pagination-bullet]:h-2 [&_.swiper-pagination-bullet]:w-2 [&_.swiper-pagination-bullet-active]:w-6 [&_.swiper-pagination-bullet-active]:rounded-full ${paginationCls}`} />
       </motion.div>
 
       <Dialog open={open} onOpenChange={(o) => !o && close()}>
@@ -219,14 +219,14 @@ export function GallerySwiper({ images, variant = "dark", slideSize = "default" 
                 <button
                   type="button"
                   onClick={goPrev}
-                  className="rounded-md px-4 py-2 font-body text-sm text-dominant hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-dominant"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl px-5 py-3 font-body text-sm font-medium text-dominant hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-dominant"
                 >
                   Previous
                 </button>
                 <button
                   type="button"
                   onClick={goNext}
-                  className="rounded-md px-4 py-2 font-body text-sm text-dominant hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-dominant"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl px-5 py-3 font-body text-sm font-medium text-dominant hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-dominant"
                 >
                   Next
                 </button>

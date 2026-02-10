@@ -197,48 +197,48 @@ export function ShareSection() {
       className="bg-[#101922] pt-0 pb-24 md:pb-32"
     >
       {/* Sticky "Share the joy" – card content scrolls up into this area */}
-      <div className="sticky top-16 z-10 bg-[#101922] pb-10 pt-20 md:pt-28" aria-hidden={false}>
+      <div className="sticky top-16 z-10 bg-[#101922] pb-6 pt-16 md:pt-20" aria-hidden={false}>
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
           <h2 className="font-display text-3xl font-medium tracking-tight text-white md:text-4xl">
             Share the joy
           </h2>
-          <p className="mt-3 font-body text-neutral-400">
+          <p className="mt-2 font-body text-neutral-400">
             Share our day with friends or create your own shareable card.
           </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={handleWhatsApp}
               className={cn(
-                "inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2.5 font-body text-sm font-medium text-white",
+                "inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white/10 px-5 py-3 font-body text-sm font-medium text-white",
                 "transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101922]"
               )}
               aria-label="Share on WhatsApp"
             >
-              <MessageCircle className="size-5" />
+              <MessageCircle className="size-5 shrink-0" />
               WhatsApp
             </button>
             <button
               type="button"
               onClick={handleCopyLink}
               className={cn(
-                "inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2.5 font-body text-sm font-medium text-white",
+                "inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white/10 px-5 py-3 font-body text-sm font-medium text-white",
                 "transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101922]",
                 copied && "bg-white/20"
               )}
               aria-label="Copy link"
             >
-              <Link2 className="size-5" />
+              <Link2 className="size-5 shrink-0" />
               {copied ? "Copied!" : "Copy link"}
             </button>
             {canNativeShare && (
               <button
                 type="button"
                 onClick={handleNativeShare}
-                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2.5 font-body text-sm font-medium text-white transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101922]"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white/10 px-5 py-3 font-body text-sm font-medium text-white transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#101922]"
                 aria-label="Share"
               >
-                <Share2 className="size-5" />
+                <Share2 className="size-5 shrink-0" />
                 Share
               </button>
             )}
@@ -247,7 +247,7 @@ export function ShareSection() {
       </div>
 
       {/* Card creation panel – scrolls up and into the sticky "Share the joy" div above */}
-      <div className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
+      <div className="mx-auto max-w-3xl px-4 pb-12 sm:px-6">
         <div className="rounded-2xl bg-white/[0.07] p-6 shadow-2xl backdrop-blur-md md:p-8">
           <p className="font-body text-sm font-medium text-white">Create your shareable card</p>
           <p className="mt-1 font-body text-sm text-neutral-400">
@@ -300,8 +300,8 @@ export function ShareSection() {
         </div>
         {(cardStyle === "photo" || cardStyle === "photo-side") && (
           <div className="mt-4 flex flex-col items-center gap-2">
-            <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-4 py-2.5 font-body text-sm text-white transition hover:bg-white/20 hover:border-white/50">
-              <ImagePlus className="size-5 text-white/90" />
+            <label className="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-5 py-3 font-body text-sm text-white transition hover:bg-white/20 hover:border-white/50">
+              <ImagePlus className="size-5 shrink-0 text-white/90" />
               <span>{photoPreview ? "Change photo" : "Add your photo"}</span>
               <input
                 type="file"
@@ -384,20 +384,20 @@ export function ShareSection() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className={cn(
-                "inline-flex items-center gap-2 rounded-lg bg-rose px-4 py-2.5 font-body text-sm font-medium text-white",
+                "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-rose px-5 py-3 font-body text-sm font-medium text-white",
                 "transition focus:outline-none focus:ring-2 focus:ring-rose focus:ring-offset-2 disabled:opacity-60"
               )}
             >
-              <Download className="size-5" />
+              <Download className="size-5 shrink-0" />
               {downloading ? "Creating…" : "Download image"}
             </motion.button>
             <button
               type="button"
               onClick={handleDownloadInstagram}
               disabled={downloading || (!photoLoaded && !!photoPreview && cardStyle !== "minimal")}
-              className="inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-4 py-2.5 font-body text-sm font-medium text-white transition hover:bg-white/20 hover:border-white/50 disabled:opacity-60"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-5 py-3 font-body text-sm font-medium text-white transition hover:bg-white/20 hover:border-white/50 disabled:opacity-60"
             >
-              <Instagram className="size-5" />
+              <Instagram className="size-5 shrink-0" />
               Instagram (1080×1080)
             </button>
             <button
@@ -405,16 +405,16 @@ export function ShareSection() {
               onClick={handleCopyImage}
               disabled={downloading}
               className={cn(
-                "inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-4 py-2.5 font-body text-sm font-medium text-white transition hover:bg-white/20 hover:border-white/50 disabled:opacity-60",
+                "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-5 py-3 font-body text-sm font-medium text-white transition hover:bg-white/20 hover:border-white/50 disabled:opacity-60",
                 copyImageMessage && "border-white/60 bg-white/20"
               )}
             >
-              <Copy className="size-5" />
+              <Copy className="size-5 shrink-0" />
               {copyImageMessage ? "Copied! Paste in Stories" : "Copy image"}
             </button>
           </div>
         </div>
-          <p className="mx-auto mt-10 max-w-md font-body text-xs text-neutral-500">
+          <p className="mx-auto mt-6 max-w-md font-body text-xs text-neutral-500">
             Cards are created on your device and saved to your Downloads folder. We don&apos;t store your photos or data.
           </p>
         </div>

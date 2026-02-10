@@ -5,7 +5,7 @@ import { DatePlaceSection } from "@/components/sections/DatePlaceSection";
 import { ShareSection } from "@/components/sections/ShareSection";
 import { RsvpSection } from "@/components/sections/RsvpSection";
 import { Footer } from "@/components/sections/Footer";
-import { Navbar } from "@/components/sections/Navbar";
+import { Sidebar } from "@/components/sections/Sidebar";
 import { getDefaultGallery, getGalleryBySlug } from "@/lib/sanity/fetch";
 
 const GALLERY_SECTIONS = [
@@ -67,8 +67,8 @@ function GalleryFallback() {
 export default function Home() {
   return (
     <div className="min-h-screen overflow-x-hidden">
-      <Navbar />
-      <main>
+      <Sidebar />
+      <main className="pl-0 md:pl-56">
         <Hero />
         <Suspense fallback={<GalleryFallback />}>
           <GalleriesData />
