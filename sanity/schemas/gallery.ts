@@ -1,14 +1,6 @@
 import { defineType, defineArrayMember } from "sanity";
 import { ImagesIcon } from "@sanity/icons";
 
-const GALLERY_SECTIONS = [
-  { id: "gallery-our-day", title: "Our Day", slug: "our-day", order: 0 },
-  { id: "gallery-family", title: "Family", slug: "family", order: 1 },
-  { id: "gallery-friends", title: "Friends", slug: "friends", order: 2 },
-  { id: "gallery-bride", title: "Bride", slug: "bride", order: 3 },
-  { id: "gallery-groom", title: "Groom", slug: "groom", order: 4 },
-] as const;
-
 const galleryImage = defineType({
   name: "galleryImage",
   type: "object",
@@ -58,13 +50,4 @@ export const gallery = defineType({
       return { title: title || "Gallery" };
     },
   },
-  initialValueTemplates: (prev) => [
-    ...prev,
-    ...GALLERY_SECTIONS.map(({ id, title, slug, order }) => ({
-      id,
-      title,
-      schemaType: "gallery" as const,
-      value: { title, slug: { _type: "slug" as const, current: slug }, order },
-    })),
-  ],
 });
