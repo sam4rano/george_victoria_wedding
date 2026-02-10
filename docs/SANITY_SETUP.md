@@ -50,15 +50,25 @@ Same Project ID and dataset as above.
 4. For production, add your live site URL (e.g. `https://yourdomain.com`).
 5. Leave **Allow credentials** enabled so login works.
 
-## 5. First content (gallery)
+## 5. Galleries (Our Day, Family, Friends, Bride, Groom)
 
-1. In the Studio, open **Gallery** in the sidebar.
-2. Click **Create new** and add a **Gallery** document.
-3. Set **Title** (e.g. “Our Day”), set **Slug** (e.g. `our-day`), set **Order** (e.g. `0`).
-4. In **Images**, add items: upload image, set **Alt text** and optional **Caption** and **Order**.
-5. **Publish** the document.
+The site shows five gallery sections. In the Studio sidebar you’ll see **Galleries** with:
 
-The wedding site will load this gallery on the home page (it uses the first gallery by order).
+- **Our Day** – main wedding gallery (order `0`)
+- **Family**
+- **Friends**
+- **Bride**
+- **Groom**
+- **All galleries** – list of every gallery
+
+**To add photos to a section:**
+
+1. Open **Galleries** in the sidebar, then the section (e.g. **Family**).
+2. If the list is empty, click **Create new**.
+3. When asked for a template, choose the one that matches the section (e.g. **Family**). Title and slug will be set for you.
+4. Add images in the **Images** array (upload or select), add optional alt text or captions, then **Publish**.
+
+**Slug / order:** Our Day uses slug `our-day` and order `0`; Family/Friends/Bride/Groom use slugs `family`, `friends`, `bride`, `groom`. The site uses the first gallery by **Order** for the “Our Day” section if no `our-day` slug exists.
 
 ## 6. Run commands
 

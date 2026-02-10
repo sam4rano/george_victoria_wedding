@@ -19,9 +19,26 @@ import "swiper/css/pagination";
 
 interface GallerySwiperProps {
   images: GalleryImage[];
+  variant?: "light" | "dark";
 }
 
-export function GallerySwiper({ images }: GallerySwiperProps) {
+const navClasses = {
+  light:
+    "rounded-full bg-neutral-200/90 text-neutral-700 shadow-md transition hover:bg-neutral-300 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 focus-visible:ring-offset-2 disabled:opacity-40",
+  dark:
+    "rounded-full bg-white/25 text-white shadow-lg backdrop-blur-sm transition hover:scale-105 hover:bg-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 disabled:opacity-40",
+};
+
+const paginationClasses = {
+  light:
+    "[&_.swiper-pagination-bullet]:bg-neutral-400 [&_.swiper-pagination-bullet-active]:bg-neutral-700",
+  dark:
+    "[&_.swiper-pagination-bullet]:bg-white/40 [&_.swiper-pagination-bullet-active]:bg-white",
+};
+
+export function GallerySwiper({ images, variant = "dark" }: GallerySwiperProps) {
+  const navCls = navClasses[variant];
+  const paginationCls = paginationClasses[variant];
   const filtered = images.filter((img) => img.asset?.url);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const open = lightboxIndex !== null;
@@ -55,6 +72,7 @@ export function GallerySwiper({ images }: GallerySwiperProps) {
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
         className="font-body text-center text-neutral-500"
       >
         No photos yet. Check back soon.
@@ -65,11 +83,11 @@ export function GallerySwiper({ images }: GallerySwiperProps) {
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="relative mx-auto max-w-5xl px-4 py-8"
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        className="relative mx-auto max-w-5xl overflow-visible px-4 py-8"
       >
         <Swiper
           effect="coverflow"
@@ -110,7 +128,7 @@ export function GallerySwiper({ images }: GallerySwiperProps) {
                 <button
                   type="button"
                   onClick={() => setLightboxIndex(index)}
-                  className="group relative block aspect-4/3 w-full overflow-hidden rounded-xl shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                  className="group relative block aspect-4/3 w-full overflow-hidden rounded-xl shadow-lg ring-neutral-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   aria-label={`View image ${index + 1}: ${alt}`}
                 >
                   <Image
@@ -118,10 +136,10 @@ export function GallerySwiper({ images }: GallerySwiperProps) {
                     alt={alt}
                     fill
                     sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, 360px"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="object-cover transition-transform duration-300 ease-out group-hover:scale-105"
                   />
                   <span
-                    className="absolute inset-0 bg-neutral-900/0 transition-colors duration-300 group-hover:bg-neutral-900/15"
+                    className="absolute inset-0 bg-neutral-900/0 transition-colors duration-300 group-hover:bg-neutral-900/10"
                     aria-hidden
                   />
                 </button>
@@ -133,7 +151,7 @@ export function GallerySwiper({ images }: GallerySwiperProps) {
         <button
           type="button"
           aria-label="Previous image"
-          className="gallery-swiper-prev absolute left-0 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-dominant/90 text-accent shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-40 md:left-2"
+          className={`gallery-swiper-prev absolute left-0 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center md:left-2 ${navCls}`}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <path d="M15 18l-6-6 6-6" />
@@ -142,13 +160,13 @@ export function GallerySwiper({ images }: GallerySwiperProps) {
         <button
           type="button"
           aria-label="Next image"
-          className="gallery-swiper-next absolute right-0 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-dominant/90 text-accent shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-40 md:right-2"
+          className={`gallery-swiper-next absolute right-0 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center md:right-2 ${navCls}`}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <path d="M9 18l6-6-6-6" />
           </svg>
         </button>
-        <div className="gallery-swiper-pagination mt-6 flex justify-center gap-1.5 [&_.swiper-pagination-bullet]:h-2 [&_.swiper-pagination-bullet]:w-2 [&_.swiper-pagination-bullet]:bg-neutral-300 [&_.swiper-pagination-bullet-active]:w-6 [&_.swiper-pagination-bullet-active]:rounded-full [&_.swiper-pagination-bullet-active]:bg-accent" />
+        <div className={`gallery-swiper-pagination mt-8 flex justify-center gap-1.5 [&_.swiper-pagination-bullet]:h-2 [&_.swiper-pagination-bullet]:w-2 [&_.swiper-pagination-bullet-active]:w-6 [&_.swiper-pagination-bullet-active]:rounded-full ${paginationCls}`} />
       </motion.div>
 
       <Dialog open={open} onOpenChange={(o) => !o && close()}>

@@ -1,4 +1,13 @@
-import { defineType } from "sanity";
+import { defineType, defineArrayMember } from "sanity";
+import { ImagesIcon } from "@sanity/icons";
+
+const GALLERY_SECTIONS = [
+  { id: "gallery-our-day", title: "Our Day", slug: "our-day", order: 0 },
+  { id: "gallery-family", title: "Family", slug: "family", order: 1 },
+  { id: "gallery-friends", title: "Friends", slug: "friends", order: 2 },
+  { id: "gallery-bride", title: "Bride", slug: "bride", order: 3 },
+  { id: "gallery-groom", title: "Groom", slug: "groom", order: 4 },
+] as const;
 
 const galleryImage = defineType({
   name: "galleryImage",
@@ -28,6 +37,7 @@ export const gallery = defineType({
   name: "gallery",
   title: "Gallery",
   type: "document",
+  icon: ImagesIcon,
   fields: [
     { name: "title", type: "string", title: "Title" },
     { name: "slug", type: "slug", title: "Slug", options: { source: "title" } },
@@ -36,7 +46,7 @@ export const gallery = defineType({
       name: "images",
       type: "array",
       title: "Images",
-      of: [{ type: "galleryImage" }],
+      of: [defineArrayMember({ type: "galleryImage" })],
     },
   ],
   orderings: [
@@ -48,4 +58,13 @@ export const gallery = defineType({
       return { title: title || "Gallery" };
     },
   },
+  initialValueTemplates: (prev) => [
+    ...prev,
+    ...GALLERY_SECTIONS.map(({ id, title, slug, order }) => ({
+      id,
+      title,
+      schemaType: "gallery" as const,
+      value: { title, slug: { _type: "slug" as const, current: slug }, order },
+    })),
+  ],
 });
